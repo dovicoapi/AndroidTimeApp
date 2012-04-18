@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="@drawable/bg_gray"
+	>
+	<RelativeLayout android:id="@+id/layout_titlebar"
+	    android:layout_width="fill_parent"
+	    android:layout_height="50dip"
+	    android:background="@drawable/bg_titlebar_blue"
+	    >
+	    <TextView 
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true"
+	        android:gravity="center"
+	        android:text="@string/activity_setup_titlebar"
+	        android:textColor="#ffffff"
+	        android:textSize="22sp"
+        />	    
+	</RelativeLayout>
+	
+	<ScrollView 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	     android:layout_below="@+id/layout_titlebar"
+	     android:layout_above="@+id/tabbar"
+	     android:layout_margin="10dip"
+	     android:scrollbars="none"
+	    >
+	    <LinearLayout 
+	        android:orientation="vertical"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_centerInParent="true"
+	        >
+
+		    <TextView 
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_centerVertical="true"
+		        android:text="Data access token for Apps; available by logging into DOVICO services and going to the Timesheet View / Options."
+		        android:textColor="#000000"
+		        />
+		    <EditText android:id="@+id/edittext_access"
+		        android:layout_width="fill_parent"
+		        android:layout_height="80dip"
+		        android:layout_margin="10dip"
+		        android:padding="5dip"
+		        android:layout_centerVertical="true"
+		        android:layout_alignParentRight="true"
+		        android:maxLines="2"
+		        />
+
+	     <!--     <Button android:id="@+id/button_reset"
+				android:layout_width="150dip"
+				android:layout_height="30dip"
+				android:layout_centerVertical="true"
+				android:layout_gravity="center"
+				android:layout_marginBottom="10dip"
+				android:text="Reset data token"
+				android:textStyle="bold"
+				android:textColor="#ffffff"
+				android:textSize="14dip"
+				android:background="@drawable/btn_orange"
+				android:onClick="onClickReset"
+				/> -->
+		   			
+			<RelativeLayout 
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    >
+			    <TextView 
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_centerVertical="true"
+			        android:text="Hide Client Name:"
+			        android:textColor="#000000"
+			        />
+			    <Spinner android:id="@+id/hide_client_name_spinner"
+			        android:layout_width="100dip"
+			        android:layout_height="40dip"
+			        android:layout_centerVertical="true"
+			        android:layout_alignParentRight="true"
+			        android:inputType="time"
+			        android:entries="@array/yes_no"
+			        />
+			</RelativeLayout>
+			
+			<RelativeLayout 
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    >
+			    <TextView 
+			        android:id="@+id/enterTime"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_centerVertical="true"
+			        android:text="@string/activity_setup_enter_time_label"
+			        android:textColor="#000000"
+			        />
+			    <TextView 
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_below="@id/enterTime"
+			        android:layout_marginTop="27dip"
+			        android:text="*One and half hours: &#xA;Decimal (1.5) - Minutes (01:30) "
+			        android:textColor="#000000"
+			        android:textSize="11sp"
+			        android:textStyle="italic"
+			        />
+			
+			    <Spinner android:id="@+id/minutes_decimal_spinner"
+			        android:layout_width="145dip"
+			        android:layout_height="40dip"
+			        android:layout_centerVertical="true"
+			        android:layout_alignParentRight="true"
+			        android:inputType="time"
+			        android:entries="@array/minutes_decimal"
+			        />
+			</RelativeLayout>
+			
+			<Button android:id="@+id/button_apply"
+				android:layout_width="150dip"
+				android:layout_height="30dip"
+				android:layout_marginTop="50dip"
+				android:layout_gravity="center"
+				android:text="Apply"
+				android:textStyle="bold"
+				android:textColor="#ffffff"
+				android:textSize="14dip"
+				android:background="@drawable/btn_orange"
+				android:onClick="onClickApply"
+				/>
+			
+		</LinearLayout>
+	</ScrollView>
+	<include layout="@layout/tab_bar" android:id="@+id/tabbar"/>
+</RelativeLayout>

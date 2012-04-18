@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, ActivitySplash!</string>
+    <string name="app_name">DOVICO</string>
+    
+    <string name="dialog_authorization_failed_header">Authorization Failed</string>    
+    <string name="dialog_authorization_failed_text">Your Data access token for Apps did not pass authentication correctly. You will be redirected to the setup screen where you can adjust your token.</string>
+    <string name="dialog_no_internet_connection_header">An Error Occurred</string>    
+    <string name="dialog_no_internet_connection_text">Please check your Internet connection and try again.</string>
+
+    <string name="activity_main_titlebar">Time Entry</string>
+    <string name="activity_about_titlebar">About</string>
+    <string name="activity_setup_titlebar">Setup</string>
+    <string name="activity_timesheet_titlebar">Timesheet</string>
+    
+    <string name="activity_setup_enter_time_label">Enter time in Minutes\nor Decimal:</string>
+    
+    <string name="january">January</string>
+	<string name="february">February</string>
+	<string name="march">March</string>
+	<string name="april">April</string>
+	<string name="may">May</string>
+	<string name="june">June</string>
+	<string name="july">July</string>
+	<string name="august">August</string>
+	<string name="september">September</string>
+	<string name="october">October</string>
+	<string name="november">November</string>
+	<string name="december">December</string>
+	
+	<string name="short_january">Jan</string>
+	<string name="short_february">Feb</string>
+	<string name="short_march">Mar</string>
+	<string name="short_april">Apr</string>
+	<string name="short_may">May</string>
+	<string name="short_june">Jun</string>
+	<string name="short_july">Jul</string>
+	<string name="short_august">Aug</string>
+	<string name="short_september">Sept</string>
+	<string name="short_october">Oct</string>
+	<string name="short_november">Nov</string>
+	<string name="short_december">Dec</string>
+	
+	<string name="monday_short">Mon</string>
+	<string name="tuesday_short">Tue</string>
+	<string name="wednesday_short">Wed</string>
+	<string name="thursday_short">Thu</string>
+	<string name="friday_short">Fri</string>
+	<string name="saturday_short">Sat</string>
+	<string name="sunday_short">Sun</string>
+	
+    
+    <string-array name="yes_no">
+        <item >Yes</item>
+        <item >No</item>
+    </string-array>
+    	
+    <string-array name="regional_setting">
+        <item >Afrikaans (South Africa)</item>
+        <item >Arabic (Algeria)</item>
+        <item >Arabic (Bahrain)</item>
+        <item >Arabic (Egypt)</item>
+        <item >Arabic (Iraq)</item>
+        <item >Arabic (Jordan)</item>
+        <item >Arabic (Kuwait)</item>
+        <item >Arabic (Lebanon)</item>
+        <item >Arabic (Libya)</item>
+        <item >Arabic (Morocco)</item>
+        <item >Arabic (Oman)</item>
+        <item >Arabic (Qatar)</item>
+        <item >Arabic (Saudi Arabia)</item>
+        <item >Arabic (Syria)</item>
+        <item >Arabic (Tunisia)</item>
+        <item >Arabic (U.A.E.)</item>
+        <item >Arabic (Yemen)</item>
+        <item >Armenian (Armenia)</item>
+        <item >Azeri (Cyrillic, Azerbaijan)</item>
+        <item >Azeri (Latin, Azerbaijan)</item>
+        <item >Basque (Basque)</item>
+        <item >Belarusian (Belarus)</item>
+        <item >Bosnian (Bosnia and Herzegovina)</item>
+        <item >Bosnian (Cyrillic) (Bosnia and Herzegovina)</item>
+        <item >Bulgarian (Bulgaria)</item>
+        <item >Catalan (Catalan)</item>
+        <item >Chinese (Hong Kong S.A.R.)</item>
+        <item >Chinese (Macao S.A.R.)</item>
+        <item >Chinese (People\'s Republic of China)</item>
+        <item >Chinese (Singapore)</item>
+        <item >Chinese (Taiwan)</item>
+        <item >Croatian (Bosnia and Herzegovina)</item>
+        <item >Croatian (Croatia)</item>
+        <item >Czech (Czech Republic)</item>
+        <item >Danish (Denmark)</item>
+        <item >Divehi (Maldives)</item>
+        <item >Dutch (Belgium)</item>
+        <item >Dutch (Netherlands)</item>
+        <item >English (Australia)</item>
+        <item >English (Belize)</item>
+        <item >English (Canada)</item>
+        <item >English (Caribbean)</item>
+        <item >English (Ireland)</item>
+        <item >English (Jamaica)</item>
+        <item >English (New Zealand)</item>
+        <item >English (Republic of the Philippines)</item>
+        <item >English (South Africa)</item>
+        <item >English (Trinidad and Tobago)</item>
+        <item >English (United Kingdom)</item>
+        <item >English (United States)</item>
+        <item >English (Zimbabwe)</item>
+        <item >Estonian (Estonia)</item>
+        <item >Faroese (Faroe Islands)</item>
+        <item >Filipino (Philippines)</item>
+        <item >Finnish (Finland)</item>
+        <item >French (Belgium)</item>
+        <item >French (Canada)</item>
+        <item >French (France)</item>
+        <item >French (Luxembourg)</item>
+        <item >French (Principality of Monaco)</item>
+        <item >French (Switzerland)</item>
+        <item >Frisian (Netherlands)</item>
+        <item >Galician (Galician)</item>
+        <item >Georgian (Georgia)</item>
+        <item >German (Austria)</item>
+        <item >German (Germany)</item>
+        <item >German (Liechtenstein)</item>
+        <item >German (Luxembourg)</item>
+        <item >German (Switzerland)</item>
+        <item >Greek (Greece)</item>
+        <item >Gujarati (India)</item>
+        <item >Hebrew (Israel)</item>
+        <item >Hindi (India)</item>
+        <item >Hungarian (Hungary)</item>
+        <item >Icelandic (Iceland)</item>
+        <item >Indonesian (Indonesia)</item>
+        <item >Inuktitut (Latin) (Canada)</item>
+        <item >Irish (Ireland)</item>
+        <item >Italian (Italy)</item>
+        <item >Italian (Switzerland)</item>
+        <item >Japanese (Japan)</item>
+        <item >Kannada (India)</item>
+        <item >Kazakh (Kazakhstan)</item>
+        <item >Kiswahili (Kenya)</item>
+        <item >Korean (Korea)</item>
+        <item >Kyrgyz (Kyrgyzstan)</item>
+        <item >Latvian (Latvia)</item>
+        <item >Lithuanian (Lithuania)</item>
+        <item >Luxembourgish (Luxembourg)</item>
+        <item >Macedonian (Former Yugoslav Republic of Macedonia)</item>
+        <item >Malay (Brunei Darussalam)</item>
+        <item >Malay (Malaysia)</item>
+        <item >Maltese (Malta)</item>
+        <item >Maori (New Zealand)</item>
+        <item >Mapudungun (Chile)</item>
+        <item >Marathi (India)</item>
+        <item >Mohawk (Canada)</item>
+        <item >Mongolian (Cyrillic, Mongolia)</item>
+        <item >Norwegian, Bokmål (Norway)</item>
+        <item >Norwegian, Nynorsk (Norway)</item>
+        <item >Persian (Iran)</item>
+        <item >Polish (Poland)</item>
+        <item >Portuguese (Brazil)</item>
+        <item >Portuguese (Portugal)</item>
+        <item >Punjabi (India)</item>
+        <item >Quechua (Bolivia)</item>
+        <item >Quechua (Ecuador)</item>
+        <item >Quechua (Peru)</item>
+        <item >Romanian (Romania)</item>
+        <item >Romansh (Switzerland)</item>
+        <item >Russian (Russia)</item>
+        <item >Sami (Inari) (Finland)</item>
+        <item >Sami (Lule) (Norway)</item>
+        <item >Sami (Lule) (Sweden)</item>
+        <item >Sami (Northern) (Finland)</item>
+        <item >Sami (Northern) (Norway)</item>
+        <item >Sami (Northern) (Sweden)</item>
+        <item >Sami (Skolt) (Finland)</item>
+        <item >Sami (Skolt) (Finland)</item>
+        <item >Sami (Southern) (Norway)</item>
+        <item >Sami (Southern) (Sweden)</item>
+        <item >Sanskrit (India)</item>
+        <item >Serbian (Cyrillic) (Bosnia and Herzegovina)</item>
+        <item >Serbian (Cyrillic, Serbia)</item>
+        <item >Serbian (Latin) (Bosnia and Herzegovina)</item>
+        <item >Serbian (Latin, Serbia)</item>
+        <item >Sesotho sa Leboa (South Africa)</item>
+        <item >Setswana (South Africa)</item>
+        <item >Slovak (Slovakia)</item>
+        <item >Slovenian (Slovenia)</item>
+        <item >Spanish (Argentina)</item>
+        <item >Spanish (Bolivia)</item>
+        <item >Spanish (Chile)</item>
+        <item >Spanish (Colombia)</item>
+        <item >Spanish (Costa Rica)</item>
+        <item >Spanish (Dominican Republic)</item>
+        <item >Spanish (Ecuador)</item>
+        <item >Spanish (El Salvador)</item>
+        <item >Spanish (Guatemala)</item>
+        <item >Spanish (Honduras)</item>
+        <item >Spanish (Mexico)</item>
+        <item >Spanish (Nicaragua)</item>
+        <item >Spanish (Panama)</item>
+        <item >Spanish (Paraguay)</item>
+        <item >Spanish (Peru)</item>
+        <item >Spanish (Puerto Rico)</item>
+        <item >Spanish (Spain)</item>
+        <item >Spanish (Uruguay)</item>
+        <item >Spanish (Venezuela)</item>
+        <item >Swedish (Finland)</item>
+        <item >Swedish (Sweden)</item>
+        <item >Syriac (Syria)</item>
+        <item >Tamil (India)</item>
+        <item >Tatar (Russia)</item>
+        <item >Telugu (India)</item>
+        <item >Thai (Thailand)</item>
+        <item >Turkish (Turkey)</item>
+        <item >Ukrainian (Ukraine)</item>
+        <item >Urdu (Islamic Republic of Pakistan)</item>
+        <item >Uzbek (Cyrillic, Uzbekistan)</item>
+        <item >Uzbek (Latin, Uzbekistan)</item>
+        <item >Vietnamese (Vietnam)</item>
+        <item >Welsh (United Kingdom)</item>
+        <item >Xhosa (South Africa)</item>
+        <item >Zulu (South Africa)</item>        
+    </string-array>
+    
+    <string-array name="my_week_starts_on">
+        <item >Sunday</item>
+        <item >Monday</item>
+        <item >Tuesday</item>
+        <item >Wednesday</item>
+        <item >Thursday</item>
+        <item >Friday</item>
+        <item >Saturday</item>        
+    </string-array>
+    
+    <string-array name="default_sheet_for_new_week">
+        <item >Prompt for options</item>
+        <item >Blank sheet</item>
+        <item >From favorites</item>
+        <item >From last week</item>
+        <item >From last week without blank rows</item>
+    </string-array>
+    
+    <string-array name="minutes_decimal">
+        <item >Minutes</item>
+        <item >Decimal</item>
+    </string-array>
+    
+    <string-array name="hour_clock">
+        <item >12 Hour Clock AM/PM</item>
+        <item >24 Hour Clock</item>
+    </string-array>
+    
+        <string name="client_spinner_prompt">Choose Client</string>
+         <string name="project_spinner_prompt">Choose Project</string>
+          <string name="task_spinner_prompt">Choose Task</string>
+    
+</resources>

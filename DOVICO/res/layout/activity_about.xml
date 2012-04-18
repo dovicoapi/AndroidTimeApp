@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="@drawable/bg_gray"
+	>
+	<RelativeLayout android:id="@+id/layout_titlebar"
+	    android:layout_width="fill_parent"
+	    android:layout_height="50dip"
+	    android:background="@drawable/bg_titlebar_blue"
+	    >
+	    <TextView 
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true"
+	        android:gravity="center"
+	        android:text="@string/activity_about_titlebar"
+	        android:textColor="#ffffff"
+	        android:textSize="22sp"
+        />
+	    
+	</RelativeLayout>
+	
+	<TextView android:id="@+id/textview_customer_support"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/layout_titlebar"
+	    android:layout_marginTop="20dip"
+	    android:layout_marginBottom="10dip"
+	    android:text="Customer support:"
+	    android:gravity="center"
+	    android:textColor="#000000"
+	    android:textSize="20sp"
+	    />
+	<TextView android:id="@+id/textview_north_america"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/textview_customer_support"
+	    android:layout_margin="10dip"
+	    android:text="North America Toll Free:&#xA;1-800-618-8463"
+	    android:gravity="center"
+	    android:textColor="#000000"
+	    android:textSize="18sp"
+	    />
+	<TextView android:id="@+id/textview_international"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/textview_north_america"
+	    android:layout_margin="0dip"
+	    android:text="International Free Phone:&#xA;00 800 4618 8463"
+	    android:gravity="center"
+	    android:textColor="#000000"
+	    android:textSize="18sp"
+	    />
+	<ImageView android:id="@+id/imageview_logo"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@+id/textview_appname"
+	    android:layout_margin="10dip"
+	    android:background="@drawable/icon_logo"
+	    android:layout_centerHorizontal="true"
+	    />
+	<TextView android:id="@+id/textview_appname"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@+id/textview_copyright"
+	    android:layout_marginTop="10dip"
+	    android:layout_marginBottom="2dip"
+	    android:text="DOVICO Mobile time entry v1.2"
+	    android:gravity="center"
+	    android:textColor="#000000"
+	    android:textSize="15sp"
+	    />
+	
+	<TextView android:id="@+id/textview_copyright"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@+id/textview_all_right"
+	    android:layout_marginTop="10dip"
+	    android:layout_marginBottom="2dip"
+	    android:text="Copyright(C) 2012"
+	    android:gravity="center"
+	    android:textColor="#000000"
+	    android:textSize="15sp"
+	    />
+	
+	<TextView android:id="@+id/textview_all_right"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@+id/tab_bar"
+	    android:layout_marginBottom="15dip"
+	    android:text="DOVICO Software Inc., All Rights Reserved "
+	    android:gravity="center"
+	    android:textColor="#000000"
+	    android:textSize="15sp"
+	    />
+	
+	<include layout="@layout/tab_bar" android:id="@+id/tab_bar"/>
+</RelativeLayout>

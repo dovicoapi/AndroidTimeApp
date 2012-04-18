@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="@drawable/bg_gray"
+	>
+	<RelativeLayout android:id="@+id/layout_titlebar"
+	    android:layout_width="fill_parent"
+	    android:layout_height="50dip"
+	    android:background="@drawable/bg_titlebar_blue"
+	    >
+	<!--      <Button android:id="@+id/button_start"
+			android:layout_width="60dip"
+			android:layout_height="30dip"
+			android:layout_centerVertical="true"
+			android:layout_margin="10dip"
+			android:text="Start"
+			android:textStyle="bold"
+			android:textColor="#ffffff"
+			android:textSize="14dip"
+			android:background="@drawable/btn_orange"
+			android:layout_alignParentLeft="true"
+			android:onClick="onClickStart"
+		/> -->
+	    <TextView
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true"
+	        android:gravity="center"
+	        android:text="@string/activity_main_titlebar"
+	        android:textColor="#ffffff"
+	        android:textSize="22sp"
+        />
+	   
+	    
+	</RelativeLayout>
+	    
+	<include layout="@layout/tab_bar"  android:id="@+id/tab_bar"/>
+	
+		<Button android:id="@+id/button_next"
+			android:layout_width="80dip"
+			android:layout_height="30dip"
+			android:layout_margin="10dip"
+			android:text="Next"
+			android:textStyle="bold"
+			android:textColor="#ffffff"
+			android:textSize="16dip"
+			android:background="@drawable/btn_gray"
+			android:layout_alignParentRight="true"
+			android:layout_above ="@id/tab_bar"
+			android:layout_marginBottom="10dip"
+			android:onClick="onClickNext"
+		/>
+		
+	  	<Button android:id="@+id/button_save"
+			android:layout_width="80dip"
+			android:layout_height="30dip"
+			android:layout_margin="10dip"
+			android:text="Save"
+			android:textStyle="bold"
+			android:textColor="#ffffffff"
+			android:textSize="16dip"
+			android:background="@drawable/btn_orange"
+			android:layout_alignParentRight="true"
+			android:layout_above ="@id/tab_bar"
+			android:layout_marginBottom="10dip"
+			android:onClick="onClickSave"
+			android:visibility="gone"
+		/> 
+		
+		<Button android:id="@+id/button_previous"
+			android:layout_width="80dip"
+			android:layout_height="30dip"
+			android:layout_margin="10dip"
+			android:text="Previous"
+			android:textStyle="bold"
+			android:textColor="#ffffff"
+			android:textSize="16dip"
+			android:background="@drawable/btn_gray"
+			android:layout_alignParentLeft="true"
+			android:layout_above ="@id/tab_bar"
+			android:layout_marginBottom="10dip"
+			android:onClick="onClickPrevious"
+			android:visibility="invisible"
+		/>
+		
+			<RelativeLayout android:id="@+id/flipper"
+			android:layout_width="fill_parent" 
+			android:layout_height="fill_parent"
+			android:layout_below="@id/layout_titlebar"
+			android:layout_above="@id/button_next"
+		 	>
+		    <com.dovico.timesheet.widgets.HorizontalPager
+				android:id="@+id/flip_item_1" 
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+			>
+
+			<!-- <include layout="@layout/generic_single_tip" />
+			<include layout="@layout/generic_single_tip" />
+			<include layout="@layout/generic_single_tip" /> -->
+			
+			</com.dovico.timesheet.widgets.HorizontalPager>
+
+		</RelativeLayout>
+		
+
+	
+</RelativeLayout>

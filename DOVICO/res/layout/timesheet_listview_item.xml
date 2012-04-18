@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="3dip" >
+    
+    <TextView
+        android:id="@+id/project_client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dip"
+        android:layout_marginTop="2dip"
+        android:padding="3dip"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:text="Client Name"
+        android:textSize="16sp"
+        android:visibility="gone" />
+    
+    <TextView
+        android:id="@+id/dummy_comma"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/project_client"
+        android:layout_marginTop="2dip"
+        android:padding="3dip"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:text="-"
+        android:textSize="16sp" 
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/project_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/dummy_comma"
+        android:layout_marginTop="2dip"
+        android:padding="3dip"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:text="Project Name"
+        android:textSize="16sp" />
+    
+    <TextView
+        android:id="@+id/project_date_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/project_name"
+        android:layout_marginLeft="5dip"
+        android:padding="2dip"
+        android:textColor="@android:color/black"
+        android:text="Date:" />
+
+    <TextView
+        android:id="@+id/project_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/project_date_label"
+        android:layout_toRightOf="@id/project_date_label"
+        android:padding="2dip"
+        android:textColor="@android:color/black"
+        android:text="2012-03-09" />
+    
+       <TextView
+        android:id="@+id/project_task_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/project_date"
+        android:layout_marginLeft="5dip"
+        android:padding="2dip"
+         android:textColor="@android:color/black"
+         android:text="Task:" />
+    
+    <TextView
+        android:id="@+id/project_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/project_task_label"
+        android:layout_alignBottom="@id/project_task_label"
+        android:padding="2dip"
+        android:textColor="@android:color/black"
+        android:text="Project Task" />
+    
+    <TextView
+        android:id="@+id/project_total_hours_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/project_date"
+        android:layout_alignBottom="@id/project_date_label"
+        android:paddingBottom="2dip"
+        android:paddingTop="2dip"
+        android:paddingRight="2dip"
+        android:textColor="@android:color/black"
+        android:text=", Total hours:" />
+    
+    <TextView
+        android:id="@+id/project_total_hours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/project_total_hours_label"
+        android:layout_alignBottom="@id/project_total_hours_label"
+        android:padding="2dip"
+        android:textColor="@android:color/black"
+        android:text="23.23" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/project_task_label"
+        android:text="Delete"/>
+
+</RelativeLayout>

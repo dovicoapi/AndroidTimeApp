@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="@drawable/bg_gray"
+	>
+	<RelativeLayout android:id="@+id/layout_titlebar"
+	    android:layout_width="fill_parent"
+	    android:layout_height="50dip"
+	    android:background="@drawable/bg_titlebar_blue"
+	    >
+	    <TextView 
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_centerVertical="true"
+	        android:gravity="center"
+	        android:text="@string/activity_timesheet_titlebar"
+	        android:textColor="#ffffff"
+	        android:textSize="22sp"
+        />
+	</RelativeLayout>
+	
+		
+	<include layout="@layout/tab_bar" android:id="@+id/tab_bar"/>
+	
+	
+	<ListView android:id="@+id/listview_timesheet"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_below="@id/layout_titlebar"
+		    android:layout_above="@id/tab_bar"
+		    android:cacheColorHint="#00000000"
+		    >
+		    
+		</ListView>
+</RelativeLayout>
