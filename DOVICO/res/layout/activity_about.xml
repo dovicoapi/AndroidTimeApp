@@ -67,7 +67,7 @@
 	    android:layout_above="@+id/textview_copyright"
 	    android:layout_marginTop="10dip"
 	    android:layout_marginBottom="2dip"
-	    android:text="DOVICO Mobile time entry v1.2"
+	    android:text="DOVICO Mobile time entry v1.3"
 	    android:gravity="center"
 	    android:textColor="#000000"
 	    android:textSize="15sp"
