@@ -80,4 +80,14 @@ public abstract class RestMethod {
 	
 	}
 
+	
+	/// <history>
+	/// <modified author="C. Gerard Gallant" date="2012-06-27" reason="Copied from the Java common library - needed for when passing unsafe characters in an element of XML (between an opening and closing tag: <elementname>value with potentially unsafe characters</elementname>)"/>
+	/// </history>
+	public String encodeTextForElement(String sValue){
+		// Change all unsafe XML characters into their safe ones
+		String sReturnVal = sValue.replace("&", "&amp;");
+		sReturnVal = sReturnVal.replace("<", "&lt;");
+		return sReturnVal.replace(">", "&gt;");
+	}
 }

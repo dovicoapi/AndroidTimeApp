@@ -84,6 +84,7 @@ public class TimeEntryDao extends GenericDao {
 		timeEntry.setProjectName(cursor.getString(7));
 		timeEntry.setTaskName(cursor.getString(8));
 		timeEntry.setStatus(cursor.getString(9));
+		timeEntry.setDescription(cursor.getString(11));
 
 		Log.d(TAG, "getAssignmentFromCursor ends");
 		return timeEntry;
@@ -109,7 +110,8 @@ public class TimeEntryDao extends GenericDao {
 		contentValues.put(Db.TimeEntries.PROJECT_NAME, timeEntry.getProjectName());
 		contentValues.put(Db.TimeEntries.TASK_NAME, timeEntry.getTaskName());
 		contentValues.put(Db.TimeEntries.STATUS, timeEntry.getStatus());
-		contentValues.put(Db.TimeEntries.GLOBAL_TIME_ENTRY_ID, timeEntry.getId());
+		contentValues.put(Db.TimeEntries.GLOBAL_TIME_ENTRY_ID, timeEntry.getId());		
+		contentValues.put(Db.TimeEntries.DESCRIPTION, timeEntry.getDescription());
 
 		// StringBuffer strBuf = new StringBuffer();
 		// for (String currString : tags) {
@@ -135,12 +137,11 @@ public class TimeEntryDao extends GenericDao {
 
 
 	public Cursor getTimeEntriesCursor() {
-//		String[] selectionArgs = { Integer.toString(timeEntryID) };
-		String[] columns = { Db.TimeEntries.ID, Db.TimeEntries.DATE, Db.TimeEntries.EMPLOYEE_ID, Db.TimeEntries.PROJECT_ID, Db.TimeEntries.TASK_ID, Db.TimeEntries.TOTAL_HOURS, 
-				Db.TimeEntries.CLIENT_ID, Db.TimeEntries.PROJECT_NAME, Db.TimeEntries.TASK_NAME, Db.TimeEntries.STATUS, Db.TimeEntries.GLOBAL_TIME_ENTRY_ID};
-		Cursor cursor = db.query(tableName, columns,
-				null, null, null,
-				null, null);
+		String[] columns = { Db.TimeEntries.ID, Db.TimeEntries.DATE, Db.TimeEntries.EMPLOYEE_ID, Db.TimeEntries.PROJECT_ID, Db.TimeEntries.TASK_ID, 
+				Db.TimeEntries.TOTAL_HOURS, Db.TimeEntries.CLIENT_ID, Db.TimeEntries.PROJECT_NAME, Db.TimeEntries.TASK_NAME, Db.TimeEntries.STATUS,
+				Db.TimeEntries.GLOBAL_TIME_ENTRY_ID, Db.TimeEntries.DESCRIPTION};
+		
+		Cursor cursor = db.query(tableName, columns, null, null, null, null, null);
 		return cursor;
 	}
 

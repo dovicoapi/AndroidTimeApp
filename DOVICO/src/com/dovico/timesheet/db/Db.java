@@ -9,7 +9,7 @@ package com.dovico.timesheet.db;
 public final class Db {
 
 	public static final String DATABASE_NAME = "dovicotimesheet.db";
-	public static final int DATABASE_VERSION = 1;
+	public static final int DATABASE_VERSION = 2;
 
 	public static final String TABLE_CLIENTS = "clients";
 	public static final String TABLE_PROJECTS = "projects";
@@ -133,6 +133,7 @@ public static final class TimeEntries {
 		public static final String TASK_NAME = "taskName";
 		public static final String STATUS = "status";
 		public static final String GLOBAL_TIME_ENTRY_ID = "globalTimeEntryID";
+		public static final String DESCRIPTION = "description";
 		
 		public static final String CREATE_STATEMENT = "CREATE TABLE " 
 			+ TABLE_TIME_ENTRIES
@@ -146,7 +147,8 @@ public static final class TimeEntries {
 				+ PROJECT_NAME + " TEXT, " 
 				+ TASK_NAME + " TEXT, " 
 				+ STATUS + " TEXT, " 
-				+ DATE + " TEXT)";
+				+ DATE + " TEXT, "
+				+ DESCRIPTION + " TEXT)";
 							
 	}
 }

@@ -154,6 +154,8 @@ public class XmlUtils {
 			public static final String TOTAL_HOURS_END_TAG = "</TotalHours>";
 			public static final String STATUS_BEGIN_TAG = "<Status>";
 			public static final String STATUS_END_TAG = "</Status>";
+			public static final String DESCRIPTION_BEGIN_TAG = "<Description>";
+			public static final String DESCRIPTION_END_TAG = "</Description>";
 			
 		}
 		
@@ -368,103 +370,110 @@ return newProject;
 	return assignments;
 	}
 	
+	
+	/// <history>
+    /// <modified author="C. Gerard Gallant" date="2012-06-25" reason="We've modified the URI for time entries to only request the entries within the desired date range. As a result, some of the date logic within this function was no longer needed. Also added the logic to grab the description from the time entry data returned"/>
+	/// </history>
 	public static List<TimeEntry> parseTimeEntries(String stringFromXml, Date currentDate) throws IOException {
-		List<TimeEntry> timeEntries = new ArrayList<TimeEntry>();
 		
-//		Logger.d(TAG, "currentDate nomral: day: " + currentDate.getDate() + ", month: " + currentDate.getMonth() + ", year: " + currentDate.getYear() + 1900);
-		currentDate.setTime(currentDate.getTime() - 6*1000*60*60*24);
-//		Logger.d(TAG, "currentDate substracted 6 days: day: " + currentDate.getDate() + ", month: " + currentDate.getMonth() + ", year: " + currentDate.getYear() + 1900);
+		// I don't know why but the END_TAG values defined all have an extra space at the end. The following gives us the tag without the space (I didn't remove
+		// the whitespace from the tag constants because I'm not sure if it's important or not)
+		String sTimeEntryEndTag = XMLTags.TimeEntriesXMLTags.END_TAG.substring(0, XMLTags.TimeEntriesXMLTags.END_TAG.length() - 1);		
+		
+		List<TimeEntry> timeEntries = new ArrayList<TimeEntry>();
 
 		while (stringFromXml.contains(XMLTags.TimeEntriesXMLTags.BEGIN_TAG)) {
 			TimeEntry timeEntry = new TimeEntry();
 			
-			if (stringFromXml.contains(XMLTags.TimeEntriesXMLTags.DATE_BEGIN_TAG))
-				timeEntry.setDate(extractTagValue(stringFromXml,
-						XMLTags.TimeEntriesXMLTags.DATE_END_TAG,  stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.DATE_BEGIN_TAG)));
+			// ID of the Time Entry
+			if (stringFromXml.contains(XMLTags.TimeEntriesXMLTags.ID_BEGIN_TAG)) {
+				timeEntry.setId(extractTagValue(stringFromXml, XMLTags.TimeEntriesXMLTags.ID_END_TAG, stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.ID_BEGIN_TAG)));
+				stringFromXml = stringFromXml.substring(stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.ID_END_TAG) + XMLTags.TimeEntriesXMLTags.ID_END_TAG.length());
+			}
+						
+			// SHEET ID
+			if (stringFromXml.contains(XMLTags.TimeEntriesXMLTags.SHEET_ID_BEGIN_TAG)) {
+				stringFromXml = stringFromXml.substring(stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.SHEET_ID_END_TAG)+ XMLTags.TimeEntriesXMLTags.SHEET_ID_END_TAG.length());
+			}	
 			
-			String dateString = timeEntry.getDate();
-			int day = Integer.parseInt(dateString.substring(8));
-			int month = Integer.parseInt(dateString.substring(5, 7)) - 1;
-			int year = Integer.parseInt(dateString.substring(0, 4)) - 1900;
+			// SHEET STATUS
+			if (stringFromXml.contains(XMLTags.TimeEntriesXMLTags.STATUS_BEGIN_TAG)) {
+				timeEntry.setStatus(extractTagValue(stringFromXml, XMLTags.TimeEntriesXMLTags.STATUS_END_TAG,  stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.STATUS_BEGIN_TAG)));
+			}
+
+			// PROJECT ID
+			if (stringFromXml.contains(XMLTags.TimeEntriesXMLTags.PROJECT_ID_BEGIN_TAG)) {
+				timeEntry.setProjectID(Integer.parseInt(extractTagValue(stringFromXml, XMLTags.TimeEntriesXMLTags.PROJECT_ID_END_TAG, stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.PROJECT_ID_BEGIN_TAG))));
+				stringFromXml = stringFromXml.substring(stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.PROJECT_ID_END_TAG)+ XMLTags.TimeEntriesXMLTags.PROJECT_ID_END_TAG.length());
+			}		
 			
-			Logger.d(TAG, "timeEntry day: " + day + ", year: " + year + ", month: " + month);
-			
-			Date date = new Date(year, month, day);
+			// PROJECT NAME
+			if (stringFromXml.contains(XMLTags.TimeEntriesXMLTags.PROJECT_NAME_BEGIN_TAG)) {
+				timeEntry.setProjectName(extractTagValue(stringFromXml, XMLTags.TimeEntriesXMLTags.PROJECT_NAME_END_TAG, stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.PROJECT_NAME_BEGIN_TAG)));
+				stringFromXml = stringFromXml.substring(stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.PROJECT_NAME_END_TAG)+ XMLTags.TimeEntriesXMLTags.PROJECT_NAME_END_TAG.length());
+			}	
 
-			boolean isCurrentDateBeforeTimeEntryDate = currentDate.before(date);
-			Logger.d(TAG, "isCurrentDateBeforeTimeEntryDate: " + isCurrentDateBeforeTimeEntryDate);
-			if (isCurrentDateBeforeTimeEntryDate) {
-
-				if (stringFromXml.contains(XMLTags.TimeEntriesXMLTags.ID_BEGIN_TAG)) {
-					timeEntry.setId(extractTagValue(stringFromXml, XMLTags.TimeEntriesXMLTags.ID_END_TAG, stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.ID_BEGIN_TAG)));
-					stringFromXml = stringFromXml.substring(stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.ID_END_TAG) + XMLTags.TimeEntriesXMLTags.ID_END_TAG.length());
-				}
-				
-				if (stringFromXml.contains(XMLTags.TimeEntriesXMLTags.SHEET_ID_BEGIN_TAG)) {
-//					int indexOfProjectIdBeginTag = stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.SHEET_ID_BEGIN_TAG);
-//					String tagValue = extractTagValue(stringFromXml, XMLTags.TimeEntriesXMLTags.SHEET_ID_END_TAG, indexOfProjectIdBeginTag);
-//					timeEntry.setProjectID(Integer.parseInt(tagValue));
-					stringFromXml = stringFromXml.substring(stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.SHEET_ID_END_TAG)+ XMLTags.TimeEntriesXMLTags.SHEET_ID_END_TAG.length());
-				}	
-				
-				if (stringFromXml.contains(XMLTags.TimeEntriesXMLTags.STATUS_BEGIN_TAG))
-					timeEntry.setStatus(extractTagValue(stringFromXml,
-							XMLTags.TimeEntriesXMLTags.STATUS_END_TAG,  stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.STATUS_BEGIN_TAG)));
-
-				if (stringFromXml.contains(XMLTags.TimeEntriesXMLTags.PROJECT_ID_BEGIN_TAG)) {
-					int indexOfProjectIdBeginTag = stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.PROJECT_ID_BEGIN_TAG);
-					String tagValue = extractTagValue(stringFromXml, XMLTags.TimeEntriesXMLTags.PROJECT_ID_END_TAG, indexOfProjectIdBeginTag);
-					timeEntry.setProjectID(Integer.parseInt(tagValue));
-					stringFromXml = stringFromXml.substring(stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.PROJECT_ID_END_TAG)+ XMLTags.TimeEntriesXMLTags.PROJECT_ID_END_TAG.length());
-				}		
-				
-				if (stringFromXml.contains(XMLTags.TimeEntriesXMLTags.PROJECT_NAME_BEGIN_TAG)) {
-					int indexOfProjectIdBeginTag = stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.PROJECT_NAME_BEGIN_TAG);
-					String tagValue = extractTagValue(stringFromXml, XMLTags.TimeEntriesXMLTags.PROJECT_NAME_END_TAG, indexOfProjectIdBeginTag);
-					timeEntry.setProjectName(tagValue);
-					stringFromXml = stringFromXml.substring(stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.PROJECT_NAME_END_TAG)+ XMLTags.TimeEntriesXMLTags.PROJECT_NAME_END_TAG.length());
-				}	
-
-				if (stringFromXml.contains(XMLTags.TimeEntriesXMLTags.TASK_BEGIN_TAG)) {
-					int indexOfTaskIdBeginTag = stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.TASK_BEGIN_TAG);
-					String tagValue = extractTagValue(stringFromXml, XMLTags.TimeEntriesXMLTags.TASK_END_TAG, indexOfTaskIdBeginTag);
-					timeEntry.setTaskID(Integer.parseInt(tagValue));
-					stringFromXml = stringFromXml.substring(stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.TASK_END_TAG));
-				}
-				
-				if (stringFromXml.contains(XMLTags.TimeEntriesXMLTags.TASK_NAME_BEGIN_TAG)) {
-					int indexOfProjectIdBeginTag = stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.TASK_NAME_BEGIN_TAG);
-					String tagValue = extractTagValue(stringFromXml, XMLTags.TimeEntriesXMLTags.TASK_NAME_END_TAG, indexOfProjectIdBeginTag);
-					timeEntry.setTaskName(tagValue);
-					stringFromXml = stringFromXml.substring(stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.TASK_NAME_END_TAG)+ XMLTags.TimeEntriesXMLTags.TASK_NAME_END_TAG.length());
-				}	
-
-				if (stringFromXml.contains(XMLTags.TimeEntriesXMLTags.TOTAL_HOURS_BEGIN_TAG))
-					timeEntry.setTotalHours(Double.parseDouble(extractTagValue(stringFromXml,
-							XMLTags.TimeEntriesXMLTags.TOTAL_HOURS_END_TAG,  stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.TOTAL_HOURS_BEGIN_TAG))));
-
-				//TODO clientID isn't sent in response, check with DOVICO what to do
-				timeEntry.setClientID(-1);
-				
-				Logger.d(TAG, "timeEntry id: " + timeEntry.getId());
-				Logger.d(TAG, "timeEntry projectID:" + timeEntry.getProjectID());
-				Logger.d(TAG, "timeEntry taskID:" + timeEntry.getTaskID());
-				Logger.d(TAG, "timeEntry date:" + timeEntry.getDate());
-				Logger.d(TAG, "timeEntry totalHours:" + timeEntry.getTotalHours());
-
-				timeEntries.add(timeEntry);
+			// TASK ID
+			if (stringFromXml.contains(XMLTags.TimeEntriesXMLTags.TASK_BEGIN_TAG)) {
+				timeEntry.setTaskID(Integer.parseInt(extractTagValue(stringFromXml, XMLTags.TimeEntriesXMLTags.TASK_END_TAG, stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.TASK_BEGIN_TAG))));
+				stringFromXml = stringFromXml.substring(stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.TASK_END_TAG));
 			}
 			
-			String taskEndTag = XMLTags.TimeEntriesXMLTags.END_TAG.substring(0, XMLTags.TimeEntriesXMLTags.END_TAG.length() - 1);
-			int taskEndDefinitionIndex = stringFromXml.indexOf(taskEndTag);
+			// TASK NAME
+			if (stringFromXml.contains(XMLTags.TimeEntriesXMLTags.TASK_NAME_BEGIN_TAG)) {
+				timeEntry.setTaskName(extractTagValue(stringFromXml, XMLTags.TimeEntriesXMLTags.TASK_NAME_END_TAG, stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.TASK_NAME_BEGIN_TAG)));
+				stringFromXml = stringFromXml.substring(stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.TASK_NAME_END_TAG)+ XMLTags.TimeEntriesXMLTags.TASK_NAME_END_TAG.length());
+			}	
+
+			// DATE
+			if (stringFromXml.contains(XMLTags.TimeEntriesXMLTags.DATE_BEGIN_TAG)) {
+				timeEntry.setDate(extractTagValue(stringFromXml, XMLTags.TimeEntriesXMLTags.DATE_END_TAG, stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.DATE_BEGIN_TAG)));
+				stringFromXml = stringFromXml.substring(stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.DATE_END_TAG)+ XMLTags.TimeEntriesXMLTags.DATE_END_TAG.length());
+			}
+
+			// TOTAL HOURS
+			if (stringFromXml.contains(XMLTags.TimeEntriesXMLTags.TOTAL_HOURS_BEGIN_TAG)) {
+				timeEntry.setTotalHours(Double.parseDouble(extractTagValue(stringFromXml, XMLTags.TimeEntriesXMLTags.TOTAL_HOURS_END_TAG,  stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.TOTAL_HOURS_BEGIN_TAG))));
+				stringFromXml = stringFromXml.substring(stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.TOTAL_HOURS_END_TAG)+ XMLTags.TimeEntriesXMLTags.TOTAL_HOURS_END_TAG.length());
+			}
+
+			// DESCRIPTION
+			if (stringFromXml.contains(XMLTags.TimeEntriesXMLTags.DESCRIPTION_BEGIN_TAG)) {
+				// The trick with the description is that it might be empty '<Description/>' or it might have a value '<Description>some value</Description>'. Find
+				// the index of the Description open tag (<Description>) and the TimeEntry's close tag (</TimeEntry>).
+				int iDescriptionOpenTagIndex = stringFromXml.indexOf(XMLTags.TimeEntriesXMLTags.DESCRIPTION_BEGIN_TAG);
+				int iTimeEntryCloseTagIndex = stringFromXml.indexOf(sTimeEntryEndTag);
+				
+				// If the Description index is before the closing tag of this time entry then this time entry has a description (if the index is after the
+				// closing tag then our search for '<Description>' failed and this entry actually holds '<Description/>')...
+				if(iDescriptionOpenTagIndex < iTimeEntryCloseTagIndex){
+					// Grab the description (we create a new TimeEntry object on each loop and the default value for the description value within the object is
+					// an empty string so we don't have to worry about setting the description to an empty string if the current entry does not have a description)
+					timeEntry.setDescription(extractTagValue(stringFromXml, XMLTags.TimeEntriesXMLTags.DESCRIPTION_END_TAG,  iDescriptionOpenTagIndex));
+				} // End if(iDescriptionOpenTagIndex < iTimeEntryCloseTagIndex)
+			} // End if
+				
+								
+			Logger.d(TAG, "timeEntry id: " + timeEntry.getId());
+			Logger.d(TAG, "timeEntry projectID:" + timeEntry.getProjectID());
+			Logger.d(TAG, "timeEntry taskID:" + timeEntry.getTaskID());
+			Logger.d(TAG, "timeEntry date:" + timeEntry.getDate());
+			Logger.d(TAG, "timeEntry totalHours:" + timeEntry.getTotalHours());
+			Logger.d(TAG, "timeEntry description:" + timeEntry.getDescription());
+
+			timeEntries.add(timeEntry);
+		
+			
+			int taskEndDefinitionIndex = stringFromXml.indexOf(sTimeEntryEndTag);
 			if (taskEndDefinitionIndex != -1) {
 				stringFromXml = stringFromXml.substring(taskEndDefinitionIndex + 1);
 				Logger.i(TAG, "curr line: " + stringFromXml);
-				} else {
-					break;
-				}
-	}
-	return timeEntries;
+			} else {
+				break;
+			}
+		}
+		
+		return timeEntries;
 	}
 	
 	public static Employee parseEmployee(String stringFromXml) throws IOException{

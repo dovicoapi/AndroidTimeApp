@@ -124,6 +124,7 @@ private class DeleteTimeEntryAsync extends AsyncTask {
 	        ((TextView)convertView.findViewById(R.id.project_date)).setText(c.getString(1));
 	        ((TextView)convertView.findViewById(R.id.project_task)).setText(c.getString(8));
 	        ((TextView)convertView.findViewById(R.id.project_total_hours)).setText(c.getString(5));
+	        ((TextView)convertView.findViewById(R.id.time_entry_description)).setText(c.getString(11));
 	        
 	        final String timeEntryID = c.getString(10);
 	        String status = c.getString(9);

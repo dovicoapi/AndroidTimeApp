@@ -300,6 +300,7 @@ private class InsertTimeEntryTask extends AsyncTask {
 						public void run() {
 							Toast.makeText(getApplicationContext(), "Time Entry added successfully!", Toast.LENGTH_LONG).show();
 							((EditText)findViewById(R.id.totalHoursEditText)).setText("");
+							((EditText)findViewById(R.id.descriptionEditText)).setText("");
 							onClickPrevious(null);
 						}
 						});			
@@ -410,12 +411,23 @@ private class InsertTimeEntryTask extends AsyncTask {
     	
     	hideClientName = SharedPrefsUtil.getIntFromSharedPrefs(getApplicationContext(), SharedPrefsUtil.HIDE_CLIENT_NAME);
     	
+    	
+    	// Grab a reference to the description text box
+    	View vChild = horizontalPager.getChildAt(1);
+    	EditText txtDescription = (EditText)vChild.findViewById(R.id.descriptionEditText);
+    	
     	if (hideClientName == 0) {
-    		horizontalPager.getChildAt(1).findViewById(R.id.client_spinner).setVisibility(View.GONE);
-    		horizontalPager.getChildAt(1).findViewById(R.id.textView1).setVisibility(View.GONE);
+    		vChild.findViewById(R.id.client_spinner).setVisibility(View.GONE);
+    		vChild.findViewById(R.id.textView1).setVisibility(View.GONE);
+    		
+    		// Limit the number of lines shown before scrolling starts to 3    		
+    		txtDescription.setMaxLines(3);
     	} else {
-    		horizontalPager.getChildAt(1).findViewById(R.id.client_spinner).setVisibility(View.VISIBLE);
-    		horizontalPager.getChildAt(1).findViewById(R.id.textView1).setVisibility(View.VISIBLE);
+    		vChild.findViewById(R.id.client_spinner).setVisibility(View.VISIBLE);
+    		vChild.findViewById(R.id.textView1).setVisibility(View.VISIBLE);
+    		
+    		// Limit the number of lines shown before scrolling starts to 1    		
+    		txtDescription.setMaxLines(1);
     	}
     	
     	List<Assignment> assigns = dbManager.getAllAssignments();
@@ -750,8 +762,7 @@ private class InsertTimeEntryTask extends AsyncTask {
 		}
 		
 		if (currScreen == (horizontalPager.getPageCount() - 1)) {
-			
-			
+						
 			((EditText)findViewById(R.id.totalHoursEditText)).clearFocus();
 			
 			nextArrow.setVisibility(View.GONE);
@@ -873,10 +884,10 @@ private class InsertTimeEntryTask extends AsyncTask {
 		startActivity(intent);
 	}
 	public void onClickSave(View v){
-		
 		currentEmployeeID = SharedPrefsUtil.getIntFromSharedPrefs(getApplicationContext(), SharedPrefsUtil.EMPLOYEE_ID);
+		
 		Logger.d(TAG, "User clicked save time entry, current info:");
-		Logger.d(TAG,"clientID: " + currentClientID + ", timeEntryID: " + currentEmployeeID + " , projectID: " + currentProjectID
+		Logger.d(TAG,"clientID: " + currentClientID + ", employeeID: " + currentEmployeeID + " , projectID: " + currentProjectID
 				+ ", date: " + currentSelectedDate + ", task: " + currentTaskID + ", totalHours: " + currentTotalHours);
 		
 		Editable totalHoursText = ((EditText)findViewById(R.id.totalHoursEditText)).getEditableText();
@@ -921,6 +932,9 @@ private class InsertTimeEntryTask extends AsyncTask {
 		if (currentClientID == null || currentEmployeeID == null || currentProjectID == null || currentSelectedDate.equals("") || currentTaskID == null || currentTotalHours == null) {
 			Toast.makeText(getApplicationContext(), "You need to fill in all information for time entry (date, task and total hours)", Toast.LENGTH_LONG).show();
 		} else {
+			// Get a reference to our Description text box
+			Editable txtDescription = ((EditText)findViewById(R.id.descriptionEditText)).getEditableText();
+						
 			TimeEntry newTimeEntry = new TimeEntry();
 			newTimeEntry.setProjectID(currentProjectID);
 			newTimeEntry.setTaskID(currentTaskID);
@@ -928,10 +942,8 @@ private class InsertTimeEntryTask extends AsyncTask {
 			newTimeEntry.setDate(currentSelectedDate);
 			newTimeEntry.setEmployeeID(currentEmployeeID);
 			newTimeEntry.setClientID(currentClientID);
+			newTimeEntry.setDescription(txtDescription.toString());
 			
-//			long result = dbManager.insertNewTimeEntry(newTimeEntry);
-			
-//			final String accessToken = SharedPrefsUtil.getStringFromSharedPrefs(getApplicationContext(), SharedPrefsUtil.ACCESS_TOKEN);
 			final String userToken = SharedPrefsUtil.getStringFromSharedPrefs(getApplicationContext(), SharedPrefsUtil.USER_TOKEN);
 
 			new InsertTimeEntryTask(userToken, newTimeEntry).execute(null);

@@ -71,7 +71,7 @@ public class InsertTimeEntry extends RestMethod {
 	/**
 	 * @param timeEntry
 	 * @return 	//<TimeEntries><TimeEntry><ProjectID>1297</ProjectID><TaskID>4917</TaskID><EmployeeID>111</EmployeeID>
-	//<Date>2011-06-01</Date><StartTime>0800</StartTime><StopTime>0900</StopTime><TotalHours>1</TotalHours></TimeEntry></TimeEntries>
+	//<Date>2011-06-01</Date><StartTime>0800</StartTime><StopTime>0900</StopTime><TotalHours>1</TotalHours><Description>a description</Description></TimeEntry></TimeEntries>
 	 */
 	private String prepareTimeEntryForSubmitting(TimeEntry timeEntry) {
 		
@@ -82,13 +82,13 @@ public class InsertTimeEntry extends RestMethod {
 		sb.append("<EmployeeID>" + timeEntry.getEmployeeID() + "</EmployeeID>");
 		sb.append("<Date>" + timeEntry.getDate() + "</Date>");
 		sb.append("<TotalHours>" + timeEntry.getTotalHours() + "</TotalHours>");
+		sb.append("<Description>" + encodeTextForElement(timeEntry.getDescription()) + "</Description>");
 		sb.append("</TimeEntry>").append("</TimeEntries>");
 		
 		String timeEntryAsString = sb.toString();
 		Logger.d(TAG, "timeEntryAsString: " + timeEntryAsString);
 		
 		return timeEntryAsString;
-		//return "<TimeEntries><TimeEntry><ProjectID>1297</ProjectID><TaskID>4917</TaskID><EmployeeID>111</EmployeeID><Date>2011-06-01</Date><StartTime>0800</StartTime><StopTime>0900</StopTime><TotalHours>1</TotalHours></TimeEntry></TimeEntries>";
 	}
 
 }

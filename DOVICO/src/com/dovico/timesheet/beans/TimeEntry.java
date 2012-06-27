@@ -8,10 +8,11 @@ public class TimeEntry {
 	private long taskID;
 	private long employeeID;
 	private double totalHours;
-	private long clientID;
+	private long clientID = -1L;
 	private String projectName;
 	private String taskName;
 	private String status;
+	private String m_sDescription = "";
 	
 	
 	public String getId() {
@@ -76,4 +77,6 @@ public class TimeEntry {
 		this.status = status;
 	}
 
+	public void setDescription(String sDescription){ m_sDescription = sDescription; }
+	public String getDescription() { return m_sDescription; }
 }

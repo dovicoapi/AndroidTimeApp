@@ -39,7 +39,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_centerVertical="true"
-		        android:text="Data access token for Apps; available by logging into DOVICO services and going to the Timesheet View / Options."
+		        android:text="The 'Data Access Token for Apps' is available within DOVICO Timesheet by navigating to the Time Entry View and then selecting the Options Tab."
 		        android:textColor="#000000"
 		        />
 		    <EditText android:id="@+id/edittext_access"
