@@ -5,7 +5,7 @@
     <string name="app_name">DOVICO</string>
     
     <string name="dialog_authorization_failed_header">Authorization Failed</string>    
-    <string name="dialog_authorization_failed_text">Your Data access token for Apps did not pass authentication correctly. You will be redirected to the setup screen where you can adjust your token.</string>
+    <string name="dialog_authorization_failed_text">Your Company name, User name and password did not pass authentication correctly. You will be redirected to the setup screen.</string>
     <string name="dialog_no_internet_connection_header">An Error Occurred</string>    
     <string name="dialog_no_internet_connection_text">Please check your Internet connection and try again.</string>
 

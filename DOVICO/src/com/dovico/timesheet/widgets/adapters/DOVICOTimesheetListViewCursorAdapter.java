@@ -147,7 +147,7 @@ private class DeleteTimeEntryAsync extends AsyncTask {
 					public void onClick(View v) {
 						DeleteButtoninfo deleteButtonInfo = (DeleteButtoninfo) v.getTag();
 						Logger.d(TAG, "Button setting, actual deletion: timeEntryID: " + deleteButtonInfo.getTimeEntryID() + ", timeEntryLocalID: " + deleteButtonInfo.getTimeEntryLocalID());
-						new DeleteTimeEntryAsync(deleteButtonInfo.getTimeEntryID(), SharedPrefsUtil.getStringFromSharedPrefs(context, SharedPrefsUtil.USER_TOKEN), deleteButtonInfo.getTimeEntryLocalID()).execute(null);
+						new DeleteTimeEntryAsync(deleteButtonInfo.getTimeEntryID(), SharedPrefsUtil.getStringFromSharedPrefs(context, SharedPrefsUtil.USER_TOKEN), deleteButtonInfo.getTimeEntryLocalID()).execute((Object[])null);
 					}
 				});
 	        }

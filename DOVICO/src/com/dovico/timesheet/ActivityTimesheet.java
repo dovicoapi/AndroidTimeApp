@@ -112,7 +112,7 @@ public class ActivityTimesheet extends Activity{
 						SharedPrefsUtil.EMPLOYEE_ID)),
 						SharedPrefsUtil
 						.getStringFromSharedPrefs(getApplicationContext(),
-								SharedPrefsUtil.USER_TOKEN)).execute(null);
+								SharedPrefsUtil.USER_TOKEN)).execute((Object[])null);
 		
 	}
 

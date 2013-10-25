@@ -18,6 +18,8 @@ public class SharedPrefsUtil {
 	// SharedPrefs content
 	public static final String ACCESS_TOKEN = "accessToken";
 	public static final String USER_TOKEN = "userToken";
+	public static final String COMPANY_NAME = "companyName";
+	public static final String USER_NAME = "userName";
 	public static final String HIDE_CLIENT_NAME = "hideClientName";
 	public static final String TIME_ENTRY_MODE = "timeEntryMode";
 	public static final String EMPLOYEE_ID = "employeeID";

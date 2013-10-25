@@ -14,6 +14,7 @@ import android.widget.Spinner;
 
 import com.dovico.timesheet.db.DbManager;
 import com.dovico.timesheet.db.DbManagerImpl;
+import com.dovico.timesheet.rest.methods.Authenticate;
 import com.dovico.timesheet.rest.methods.GetEmployeeInfo;
 import com.dovico.timesheet.utils.Logger;
 import com.dovico.timesheet.utils.SharedPrefsUtil;
@@ -24,6 +25,10 @@ public class ActivitySetup extends Activity {
 	private int currentEntryTimeMode;
 	private int currentHideClientNameValue;
 	private String userToken;
+	
+	private String m_sCompany;
+	private String m_sUserName;
+	
 	private DbManager dbManager;
 	
 	private ProgressDialog getEmployeeDialog;
@@ -34,16 +39,28 @@ public class ActivitySetup extends Activity {
 
 		
 		String userToken;
-
-		public GetEmployeeAsync(String userToken) {
-			this.userToken = userToken;
+		String m_sCompany;
+		String m_sUserName;
+		String m_sPassword;
+		
+		public GetEmployeeAsync(String sCompany, String sUserName, String sPassword) {
+			m_sCompany = sCompany;
+			m_sUserName = sUserName;
+			m_sPassword = sPassword;
+			//this.userToken = userToken;
 		}
 
 		@Override
 		protected Object doInBackground(Object... params) {
 			
-			GetEmployeeInfo getEmployeeInfo = new GetEmployeeInfo(getApplicationContext(), userToken, "1");
-			getEmployeeInfo.execute();
+			/*GetEmployeeInfo getEmployeeInfo = new GetEmployeeInfo(getApplicationContext(), userToken, "1");
+			getEmployeeInfo.execute();*/
+			Authenticate auth = new Authenticate(getApplicationContext(), m_sCompany, m_sUserName, m_sPassword);
+			auth.execute();
+			
+			GetEmployeeInfo gei = new GetEmployeeInfo(getApplicationContext(), SharedPrefsUtil.getStringFromSharedPrefs(getApplicationContext(), SharedPrefsUtil.USER_TOKEN), "1");
+			gei.execute();
+			
 			Logger.d(TAG, "employeeID: " + SharedPrefsUtil.getIntFromSharedPrefs(getApplicationContext(), SharedPrefsUtil.EMPLOYEE_ID));
             
             return null;
@@ -60,7 +77,11 @@ public class ActivitySetup extends Activity {
 				dismissDialog(DIALOG_SAVING_SETTINGS);
 			}
 			
-			SharedPrefsUtil.putStringToSharedPrefs(getApplicationContext(), SharedPrefsUtil.USER_TOKEN, userToken);		
+			// james says we now save the token in the authenticate request
+			//SharedPrefsUtil.putStringToSharedPrefs(getApplicationContext(), SharedPrefsUtil.USER_TOKEN, userToken);
+			
+			SharedPrefsUtil.putStringToSharedPrefs(getApplicationContext(), SharedPrefsUtil.COMPANY_NAME, m_sCompany);
+			SharedPrefsUtil.putStringToSharedPrefs(getApplicationContext(), SharedPrefsUtil.USER_NAME, m_sUserName);
 			SharedPrefsUtil.putIntToSharedPrefs(getApplicationContext(), SharedPrefsUtil.TIME_ENTRY_MODE, currentEntryTimeMode);
 			SharedPrefsUtil.putIntToSharedPrefs(getApplicationContext(), SharedPrefsUtil.HIDE_CLIENT_NAME, currentHideClientNameValue);
 			finish();
@@ -76,9 +97,14 @@ public class ActivitySetup extends Activity {
 		setContentView(R.layout.activity_setup);
 		dbManager = DbManagerImpl.getInstance(getApplicationContext());
 		
+		m_sCompany = SharedPrefsUtil.getStringFromSharedPrefs(getApplicationContext(), SharedPrefsUtil.COMPANY_NAME);
+		m_sUserName = SharedPrefsUtil.getStringFromSharedPrefs(getApplicationContext(), SharedPrefsUtil.USER_NAME);
+		
 		userToken = SharedPrefsUtil.getStringFromSharedPrefs(getApplicationContext(), SharedPrefsUtil.USER_TOKEN);
 		
-		((EditText)findViewById(R.id.edittext_access)).setText(userToken);
+		((EditText)findViewById(R.id.txtCompany)).setText(m_sCompany);
+		((EditText)findViewById(R.id.txtUserId)).setText(m_sUserName);
+		
 //		((EditText)findViewById(R.id.edittext_access)).setText("0ce8d2d46ab9434b8737faeae86ba14e.2019");		
 		
 		Spinner minutesDecimalSpinner = (Spinner)findViewById(R.id.minutes_decimal_spinner);
@@ -161,23 +187,31 @@ public class ActivitySetup extends Activity {
 	}
 	
 	public void onClickApply(View v){
-		String newUserToken = ((EditText)findViewById(R.id.edittext_access)).getText().toString();
-		newUserToken = newUserToken.replaceAll(System.getProperty("line.separator"), "");
-		newUserToken = newUserToken.replaceAll(" ", "");
+		//String newUserToken = ((EditText)findViewById(R.id.edittext_access)).getText().toString();
+		String sCompany = ((EditText)findViewById(R.id.txtCompany)).getText().toString();
+		String sUserName = ((EditText)findViewById(R.id.txtUserId)).getText().toString();
+		String sPassword = ((EditText)findViewById(R.id.txtPassword)).getText().toString();
+		
+		/*newUserToken = newUserToken.replaceAll(System.getProperty("line.separator"), "");
+		newUserToken = newUserToken.replaceAll(" ", "");*/
 		
 		
-		if (!newUserToken.equals(userToken)) {
+		if (!sCompany.equalsIgnoreCase(m_sCompany) || !sUserName.equalsIgnoreCase(m_sUserName) || !sPassword.equals("")) {
 			dbManager.deleteAllAssignments();
 			dbManager.deleteAllClients();
 			dbManager.deleteAllProjects();
 			dbManager.deleteAllTasks();
 			dbManager.deleteAllTimeEntries();		
 			
-			new GetEmployeeAsync(newUserToken).execute(null);
+			// set the token to be an empty string until we have proof we authenticated
+			SharedPrefsUtil.putStringToSharedPrefs(getApplicationContext(), SharedPrefsUtil.USER_TOKEN, "");
+			SharedPrefsUtil.putIntToSharedPrefs(getApplicationContext(), SharedPrefsUtil.EMPLOYEE_ID, SharedPrefsUtil.SHARED_PREFS_INTEGER_DEFAULT_VALUE);
+			
+			new GetEmployeeAsync(sCompany, sUserName, sPassword).execute((Object[])null);
 			
 		} else {
 		
-		SharedPrefsUtil.putStringToSharedPrefs(getApplicationContext(), SharedPrefsUtil.USER_TOKEN, newUserToken);		
+				
 		SharedPrefsUtil.putIntToSharedPrefs(getApplicationContext(), SharedPrefsUtil.TIME_ENTRY_MODE, currentEntryTimeMode);
 		SharedPrefsUtil.putIntToSharedPrefs(getApplicationContext(), SharedPrefsUtil.HIDE_CLIENT_NAME, currentHideClientNameValue);
 		finish();

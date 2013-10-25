@@ -20,7 +20,7 @@ public class DOVICORestAPI {
 		public static final String INSERT_TIME_ENTRY = DOVICO_API_BASE_URL + "TimeEntries" + DOVICO_API_VERSION;
 		public static final String GET_TIME_ENTRIES = DOVICO_API_BASE_URL + "TimeEntries/Employee/";
 		public static final String DELETE_TIME_ENTRY = DOVICO_API_BASE_URL + "TimeEntries/";
-
+		public static final String AUTHENTICATE = DOVICO_API_BASE_URL + "Authenticate" + DOVICO_API_VERSION;
 		
 	}
 	

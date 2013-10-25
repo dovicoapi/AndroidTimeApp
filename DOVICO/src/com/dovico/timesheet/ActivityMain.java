@@ -400,6 +400,17 @@ private class InsertTimeEntryTask extends AsyncTask {
     public void onResume() {
     	super.onResume();
     	
+    	// james says: i put this code in to help with pushing to the setup screen first
+    	String sFirstTimeInit = SharedPrefsUtil.getStringFromSharedPrefs(getApplicationContext(), "FirstTimeInit");
+    	if (sFirstTimeInit.equals(""))
+    	{
+    		SharedPrefsUtil.putStringToSharedPrefs(getApplicationContext(), "FirstTimeInit", "T");
+	    	Intent intent = new Intent(this, ActivitySetup.class);
+	    	startActivity(intent);
+	    	
+	    	return;
+    	}
+    	
     	timeEntryMode = SharedPrefsUtil.getIntFromSharedPrefs(getApplicationContext(), SharedPrefsUtil.TIME_ENTRY_MODE);
     	if (timeEntryMode == 1) { 
     		((EditText)findViewById(R.id.totalHoursEditText)).setHint("e.g. 1.5");
@@ -453,7 +464,7 @@ private class InsertTimeEntryTask extends AsyncTask {
     						@Override
     						public void run() {
     							getAssignmentsAsync = new GetAssignmentsAsync(accessToken, userToken);
-    							getAssignmentsAsync.execute(null);
+    							getAssignmentsAsync.execute((Object[])null);
     						}
     					});
 
@@ -510,7 +521,7 @@ private class InsertTimeEntryTask extends AsyncTask {
 
         							if (currentClientID != 0) {
         								getChildAssignAsync = new GetChildAssignmentsAsync(accessToken, userToken, "C" + Integer.toString(currentClientID), c.getString(c.getColumnIndexOrThrow(Db.Clients.ASSIGNMENT_URI)));
-        								getChildAssignAsync.execute(null);
+        								getChildAssignAsync.execute((Object[])null);
 
         							} else {
         								Cursor projectsCursor = dbManager.getProjectsCursorFilteredByClient(currentClientID);
@@ -552,7 +563,7 @@ private class InsertTimeEntryTask extends AsyncTask {
         									currentProjectID = selectedProjectID;
 
         									getChildAssignAsync = new GetChildAssignmentsAsync(accessToken, userToken, "P" + Integer.toString(currentProjectID), c.getString(c.getColumnIndexOrThrow(Db.Projects.ASSIGNMENT_URI)));
-        									getChildAssignAsync.execute(null);
+        									getChildAssignAsync.execute((Object[])null);
 
         									((DOVICOSpinnerCursorAdapter)projectsSpinner.getAdapter()).notifyDataSetChanged();
         									tasksSpinner.setEnabled(true);
@@ -638,7 +649,7 @@ private class InsertTimeEntryTask extends AsyncTask {
 								currentProjectID = selectedProjectID;
 
 								getChildAssignAsync = new GetChildAssignmentsAsync(accessToken, userToken, "P" + Integer.toString(currentProjectID), c.getString(c.getColumnIndexOrThrow(Db.Projects.ASSIGNMENT_URI)));
-								getChildAssignAsync.execute(null);
+								getChildAssignAsync.execute((Object[])null);
 
 								((DOVICOSpinnerCursorAdapter)projectsSpinner.getAdapter()).notifyDataSetChanged();
 								tasksSpinner.setEnabled(true);
@@ -946,7 +957,7 @@ private class InsertTimeEntryTask extends AsyncTask {
 			
 			final String userToken = SharedPrefsUtil.getStringFromSharedPrefs(getApplicationContext(), SharedPrefsUtil.USER_TOKEN);
 
-			new InsertTimeEntryTask(userToken, newTimeEntry).execute(null);
+			new InsertTimeEntryTask(userToken, newTimeEntry).execute((Object[])null);
 
 		}
 	}
