@@ -70,21 +70,21 @@
 	    android:layout_marginBottom="2dip"
 	    android:layout_marginTop="10dip"
 	    android:gravity="center"
-	    android:text="DOVICO Mobile time entry v1.4"
+	    android:text="DOVICO Mobile time entry v1.5"
 	    android:textColor="#000000"
 	    android:textSize="15sp" />
 	
-	<TextView android:id="@+id/textview_copyright"
+	<TextView
+	    android:id="@+id/textview_copyright"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_above="@+id/textview_all_right"
-	    android:layout_marginTop="10dip"
 	    android:layout_marginBottom="2dip"
-	    android:text="Copyright(C) 2012"
+	    android:layout_marginTop="10dip"
 	    android:gravity="center"
+	    android:text="Copyright(C) 2013"
 	    android:textColor="#000000"
-	    android:textSize="15sp"
-	    />
+	    android:textSize="15sp" />
 	
 	<TextView android:id="@+id/textview_all_right"
 	    android:layout_width="fill_parent"
